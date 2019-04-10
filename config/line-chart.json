@@ -1,0 +1,104 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "width": 550,
+  "height": 200,
+  "padding": 10,
+  "background": "#FFF",
+  "chartFileName": "chart_1",
+
+  "config": {
+    "axis": {
+      "domain": false,
+      "labelFontSize": 12,
+      "labelFontWeight": "bold",
+      "tickSize": 0
+    }
+  },
+
+  "data": [
+    {
+      "name": "drive",
+      "values": [],
+      "format": {"type":"json", "parse":{"timestamp":"date"}}
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "x",
+      "type": "time",
+      "domain": {"data": "drive", "field": "timestamp"},
+      "range": "width",
+      "nice": true,
+      "round": true
+    },
+    {
+      "name": "y",
+      "type": "linear",
+      "domain": {"data": "drive", "field": "viewers"},
+      "range": "height",
+      "nice": true,
+      "zero": false,
+      "round": true
+    },
+    {
+      "name": "align",
+      "type": "ordinal",
+      "domain": ["timestamp", "viewers"],
+      "range": ["timestamp", "viewers"]
+    },
+    {
+      "name": "base",
+      "type": "ordinal",
+      "domain": ["timestamp", "viewers"],
+      "range": ["timestamp", "viewers"]
+    }
+  ],
+
+  "axes": [
+    {
+      "orient": "top",
+      "scale": "x",
+      "tickCount": "hour",
+      "format": "%H:%M",
+      "grid": true,
+      "labelPadding": 10,
+      "labelFontSize": 11,
+      "labelFontWeight": 300
+    },
+    {
+      "orient": "bottom",
+      "scale": "x",
+      "title": "Viewers per hour",
+      "titleFontSize": 14,
+      "titlePadding": 20,
+      "ticks": false,
+      "labels": false
+    },
+    {
+      "orient": "left",
+      "scale": "y",
+      "tickCount": 4,
+      "grid": true,
+      "labelPadding": 10,
+      "labelFontSize": 11,
+      "labelFontWeight": 300
+    }
+  ],
+
+  "marks": [
+    {
+      "type": "line",
+      "from": {"data": "drive"},
+      "encode": {
+        "enter": {
+          "interpolate": {"value": "cardinal"},
+          "x": {"scale": "x", "field": "timestamp"},
+          "y": {"scale": "y", "field": "viewers"},
+          "stroke": {"value": "#000"},
+          "strokeWidth": {"value": 3}
+        }
+      }
+    }
+  ]
+}

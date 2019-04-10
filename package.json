@@ -1,0 +1,21 @@
+{
+  "name": "chart_generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "canvas": "^2.4.1",
+    "firebase-admin": "^7.2.0",
+    "pdfmake": "^0.1.54",
+    "vega": "^5.3.5"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0"
+  }
+}

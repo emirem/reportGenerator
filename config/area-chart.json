@@ -1,0 +1,53 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "width": 550,
+  "height": 200,
+  "background": "#FFF",
+  "chartFileName": "chart_3",
+
+  "data": [
+    {
+      "name": "table",
+      "values": [],
+      "format": {"type":"json", "parse":{"timestamp":"date"}}
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "xscale",
+      "type": "time",
+      "range": "width",
+      "domain": {"data": "table", "field": "timestamp"}
+    },
+    {
+      "name": "yscale",
+      "type": "linear",
+      "range": "height",
+      "nice": true,
+      "zero": true,
+      "domain": {"data": "table", "field": "viewers"}
+    }
+  ],
+
+  "axes": [
+    {"orient": "bottom", "scale": "xscale", "tickCount": "hour", "format": "%H:%M"},
+    {"orient": "left", "scale": "yscale"}
+  ],
+
+  "marks": [
+    {
+      "type": "area",
+      "from": {"data": "table"},
+      "encode": {
+        "enter": {
+          "x": {"scale": "xscale", "field": "timestamp"},
+          "y": {"scale": "yscale", "field": "viewers"},
+          "y2": {"scale": "yscale", "value": 0},
+          "fill": {"value": "steelblue"}
+        }
+      }
+    }
+  ]
+}

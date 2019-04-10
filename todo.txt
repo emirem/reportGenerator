@@ -1,0 +1,51 @@
+      | Name:
+logo  | Followers:
+      | Smth:
+-------------------------------------------------
+
+
+
+            viewers over time chart
+
+
+
+-------------------------------------------------
+
+Duration:         Avg viewers:      
+
+Max viewers:      New followers:
+
+-------------------------------------------------
+
+
+
+        games throughout the stream chart
+
+
+
+-------------------------------------------------
+
+
+TODO:
+
+[x] Create viewers over time chart spec
+    - should be x(hours) y(viewer count)
+[-] Create games throughout the stream chart spec
+    - should be game name / amount of minutes played
+    - data calculation method:
+            - group all data by game
+            - take time of first and last occurrence of the game
+            - return result like { game: 'Name', start_at: '1554723879907', end_at: '1554723879907' }
+
+
+DESC:
+The service should accept 1 parameter:
+  - chartSpec - containing chart spec according to vega docs, and needed data.
+
+
+
+Area chart spec value example:
+{
+  "viewers" : 30137,
+  "timestamp": "Mon, 08 Apr 2019 10:29:24 GMT"
+}
