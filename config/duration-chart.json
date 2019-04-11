@@ -3,8 +3,7 @@
   "width": 550,
   "height": 200,
   "background": "#dadada29",
-  "padding": 20,
-
+  "padding": 10,
   "chartFileName": "chart_2",
 
   "data": [
@@ -21,7 +20,8 @@
           "start_at": 1554724026506,
           "end_at": 1554724326419
         }
-      ]
+      ],
+      "format": {"type":"json", "parse":{"start_at":"date", "end_at": "date"}}
     }
   ],
 

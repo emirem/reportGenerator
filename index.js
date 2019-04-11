@@ -6,19 +6,28 @@ const generatePDF = require('./lib/pdfGenerator');
 const generateChart = require('./lib/chartGenerator');
 
 // Chart configs
-const areaChartSpec = require('./config/area-chart.json');
 const lineChartSpec = require('./config/line-chart.json');
-
+const durationChartSpec = require('./config/duration-chart.json');
 
 const arrangeData = (snapshot) => {
   if (!snapshot) { return; }
 
     const data = snapshot.val();
     const values = [];
+    const durationChartValues = [];
 
     for (const property in data) {
-      const { timestamp, viewers } = data[property];
+      const { timestamp, viewers, game } = data[property];
       values.push({ timestamp, viewers });
+
+      const gameAddedIndex = durationChartValues.findIndex(({ game: addedGame }) => addedGame === game);
+
+      // If the game is already added, just update its `end_at` time
+      if (gameAddedIndex > -1) {
+        durationChartValues[gameAddedIndex].end_at = timestamp;
+      } else {
+        durationChartValues.push({ start_at: timestamp, end_at: timestamp, game });
+      }
     }
 
     lineChartSpec.data[0].values = values;
@@ -27,11 +36,22 @@ const arrangeData = (snapshot) => {
       if (err) throw err;
       console.log(`
       ----------------------------
-            Chart generated.
+          Line chart generated.
       ----------------------------
       `);
 
-      generatePDF(data, values);
+      durationChartSpec.data[0].values = durationChartValues;
+
+      generateChart(durationChartSpec, (err) => {
+        if (err) throw err;
+        console.log(`
+      ----------------------------
+        Duration chart generated.
+      ----------------------------
+        `);
+
+        generatePDF(data, values);
+      });
     });
 
     admin.app().delete();
