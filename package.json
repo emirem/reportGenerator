@@ -17,6 +17,6 @@
     "vega": "^5.3.5"
   },
   "devDependencies": {
-    "eslint": "^5.16.0"
+    "eslint": "^6.2.2"
   }
 }
